@@ -1,0 +1,9 @@
+<%= link_to 'Add Item', new_todo_list_item_path %>
+
+<div>
+  <% @items.each do |item| %>
+    <div>
+      #<%= item.title %> | <%= item.description %>
+    </div>
+  <% end %>
+</div>
