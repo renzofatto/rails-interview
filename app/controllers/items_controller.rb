@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-    # GET /todo_list/id/items
   def index
     @items = TodoList.find(params[:todo_list_id]).items
     
@@ -18,21 +17,21 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      #todo_lists/id/items
       redirect_to todo_list_items_path(todo_list_id: params[:todo_list_id])
     else
       redirect_to todo_lists_path
     end
   end
 
-  def show
+  #DELETE
+  def destroy
     @item = Item.find(params[:id])
+    @todo_list = @item.todo_list
+    @item.destroy
+    redirect_to todo_list_items_path(todo_list_id: @todo_list.id), notice: "Item deleted successfully."
   end
 
-  def edit
-    @item = Item.find(params[:id])
-  end
-  
+  # UPDATE
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
@@ -41,12 +40,12 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-    redirect_to todo_list_items_path(todo_list_id: @item.todo_list_id), notice: "Item deleted successfully."
+  
+  def edit
+    @todo_list = TodoList.find(params[:todo_list_id])
+    @item = @todo_list.items.find(params[:id])
   end
+  
   
   def item_params
     params.require(:item).permit(:title, :description, :todo_list_id)
