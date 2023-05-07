@@ -1,0 +1,12 @@
+<%= link_to 'Add Item', new_todo_list_item_path, class: 'button' %>
+
+<div>
+  <% @items.each do |item| %>
+    <div class="item">
+      <h3><%= item.title %></h3>
+      <p><%= item.description %></p>
+      <%= link_to 'Edit', edit_todo_list_item_path(item.todo_list, item), class: 'link' %>
+      <%= button_to 'Delete', todo_list_item_path(item.todo_list, item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %>
+    </div>
+  <% end %>
+</div>

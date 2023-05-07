@@ -1,0 +1,10 @@
+<div>
+  <h1>Create a Todo List</h1>
+
+  <%= form_for @todo_list, url: todo_lists_path do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.submit "Create" %>
+  <% end %>
+</div>

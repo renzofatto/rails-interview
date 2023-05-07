@@ -1,0 +1,17 @@
+<div>
+  <h1>Create a Item</h1>
+
+  <%= form_for [@todo, @item] do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.hidden_field :todo_list_id, value: @todo.id %>
+
+    <%= f.submit "Create", class:"greenBtn"%>
+
+  <% end %>
+
+</div>
